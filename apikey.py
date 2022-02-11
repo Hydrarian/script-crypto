@@ -71,7 +71,7 @@ while True:
             adaPrice=x['quote']['EUR']['price']
             print('\n##################### ADA #####################')
             print('\nValore '+x['symbol'],x['quote']['EUR']['price'])
-            guadAda = calcoloGuadagno( 932.428332, sommaInizialeInvestitaAda, 'ADA ', adaPrice, timestampStr)
+            guadAda = calcoloGuadagno( 935.728232, sommaInizialeInvestitaAda, 'ADA ', adaPrice, timestampStr)
         if x['symbol']=='USDT':
             usdtPrice=x['quote']['EUR']['price']
             guadEarningUSDT = calcoloCryptoEarn(bloccatiEarnUsdt, 10, usdtPrice)
@@ -85,6 +85,7 @@ while True:
     print('Guadagno totale (senza earn): '+ str(round(guadTot,2)))
     print('Rendita passiva (earn) al mese: '+ guadEarnTot ) 
     print('Totale (investito + guadagno): ' + str(round(totInvestiti+guadTot,2)))
+    print('Totale con valore 1 gennaio (solo ETH e senza earn): ' + str(round(10.43590781*3305.7,2))) #3305.7 è il valore MAX di ETH al 01/01/2022 (secondo Market Cap)
     print('-----------------------------------------------------------------------------\n')
     #plt.show()
     time.sleep(500)
