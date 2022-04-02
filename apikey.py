@@ -5,11 +5,14 @@ from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
-sommaInizialeInvestitaEth = 30504.48163
+sommaInizialeInvestitaEth = 32775.51163 #30504.48163
 sommaInizialeInvestitaAda = 2050
-bloccatiEarnEth = 2.91719359          #scadenza 23/02/22
-bloccatiEarnEthFlexible = 2.0453852   #scadenza 23/02/22
+bloccatiEarnEth = 3.85078471          #scadenza 24/02522
+bloccatiEarnEthFlexible = 0   #scadenza 23/02/22
 bloccatiEarnUsdt = 2250               #scadenza 27/02/22
+detenutiEth = 11.37546975
+detenutiAda = 940.452545
+
 headers_ = {
     'X-CMC_PRO_API_KEY': '68cee308-f641-4813-9d0b-57ef7a6e7846',
     'Accepts' : 'application/json'
@@ -61,7 +64,7 @@ while True:
             print(timestampStr)
             print('##################### ETH #####################')
             print('Valore '+x['symbol'],x['quote']['EUR']['price'])
-            guadEth = calcoloGuadagno( 10.43590781, sommaInizialeInvestitaEth, 'ETH ' , ethPrice, timestampStr)
+            guadEth = calcoloGuadagno( detenutiEth, sommaInizialeInvestitaEth, 'ETH ' , ethPrice, timestampStr) #11.33590781 + 0.03956194 (di earn)
             #CRYPTO.COM EARN
             print('\n##################### (EARN ETH mese) ######################')
             guadEarningETH = calcoloCryptoEarn(bloccatiEarnEth, 5.5, ethPrice)
@@ -71,7 +74,7 @@ while True:
             adaPrice=x['quote']['EUR']['price']
             print('\n##################### ADA #####################')
             print('\nValore '+x['symbol'],x['quote']['EUR']['price'])
-            guadAda = calcoloGuadagno( 935.728232, sommaInizialeInvestitaAda, 'ADA ', adaPrice, timestampStr)
+            guadAda = calcoloGuadagno( detenutiAda, sommaInizialeInvestitaAda, 'ADA ', adaPrice, timestampStr)
         if x['symbol']=='USDT':
             usdtPrice=x['quote']['EUR']['price']
             guadEarningUSDT = calcoloCryptoEarn(bloccatiEarnUsdt, 10, usdtPrice)
@@ -85,7 +88,7 @@ while True:
     print('Guadagno totale (senza earn): '+ str(round(guadTot,2)))
     print('Rendita passiva (earn) al mese: '+ guadEarnTot ) 
     print('Totale (investito + guadagno): ' + str(round(totInvestiti+guadTot,2)))
-    print('Totale con valore 1 gennaio (solo ETH e senza earn): ' + str(round(10.43590781*3305.7,2))) #3305.7 è il valore MAX di ETH al 01/01/2022 (secondo Market Cap)
+    print('Totale con valore 1 gennaio (solo ETH e senza earn): ' + str(round(detenutiEth*3305.7,2))) #3305.7 euro è il valore MAX di ETH al 01/01/2022 (secondo Market Cap)
     print('-----------------------------------------------------------------------------\n')
     #plt.show()
     time.sleep(500)
